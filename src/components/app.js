@@ -1,13 +1,11 @@
 import 'materialize-css/dist/css/materialize.min.css';
 import React, {Component} from 'react';
-import TodoList from './todo_list';
-import AddItem from './add_item';
-import listData from '../data/todo';
 import axios from 'axios';
-
-
-const BASE_URL = 'http://api.reactprototypes.com';
-const API_KEY = '?key=c618_jCarlisle';
+import {Route, Switch} from 'react-router-dom';
+import NotFound from './404';
+import Home from "./home";
+import ItemDetails from './item_details';
+import config from '../config';
 
 class App extends Component{
     constructor(props){
@@ -18,11 +16,9 @@ class App extends Component{
         };
     }
 
-    componentDidMount(){
-        this.getListData();
-    }
-
-    async addItem  (item) {
+    async addItem (item) {
+        const { api: {BASE_URL,API_KEY}} = config;
+        
         try{
             if(!item.title){
                 throw new Error('Missing Title');
@@ -40,6 +36,9 @@ class App extends Component{
     }
 
     async getListData(){
+        const { api: {BASE_URL,API_KEY}} = config; 
+        console.log(config);
+
         const resp = await axios.get(`${BASE_URL}/todos${API_KEY}`);
         this.setState({
             items:resp.data.todos
@@ -64,9 +63,13 @@ class App extends Component{
     render(){
         return (
             <div className ='container'>
-                <h1 className ='center'>To Do List</h1>
-                <AddItem  add={this.addItem.bind(this)} />
-                <TodoList list={this.state.items} />
+                <Switch>
+                    <Route exact path='/' render={(props)=>{
+                        return <Home add={this.addItem.bind(this)} list={this.state.items} getList={this.getListData.bind(this)} {...props} />
+                    }} />
+                    <Route path='/item-details/:item_id' component={ItemDetails} />
+                    <Route component={NotFound} />
+                </Switch>
             </div>
         );
 
