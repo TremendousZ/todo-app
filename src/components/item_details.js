@@ -6,7 +6,7 @@ import axios from 'axios';
 
 class ItemDetails extends Component{
     state = {
-        itemDetails: {}
+        itemDetails: null
     }
 
     async componentDidMount(){
@@ -17,6 +17,13 @@ class ItemDetails extends Component{
         this.setState({
             itemDetails: resp.data.todo
         });
+    }
+    
+    async handleDelete(){
+        console.log('delete item:   ', this.state.itemDetails._id);
+        await this.props.delete(this.state.itemDetails._id);
+
+        this.props.history.push('/');
     }
 
     render(){
@@ -40,6 +47,18 @@ class ItemDetails extends Component{
             
                 <h4><em>Title:</em> {itemDetails.title}</h4>
                 <h4><em>Details:</em> {itemDetails.details}</h4>
+                <div>
+                    <div className="row">
+                        <div className="col s6 center">
+                        <button className="btn blue">Toggle Complete</button>
+                        </div>
+
+                        <div className="col s6 center">
+                        <button onClick= {this.handleDelete.bind(this)} className="btn red darken-2">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         )
     }
