@@ -1,9 +1,8 @@
 import 'materialize-css/dist/css/materialize.min.css';
 import React, {Component} from 'react';
-import TodoList from './todo_list';
-import AddItem from './add_item';
-import listData from '../data/todo';
 import axios from 'axios';
+import {Route} from 'react-router-dom';
+import Home from "./home";
 
 
 const BASE_URL = 'http://api.reactprototypes.com';
@@ -22,7 +21,7 @@ class App extends Component{
         this.getListData();
     }
 
-    async addItem  (item) {
+    async addItem (item) {
         try{
             if(!item.title){
                 throw new Error('Missing Title');
@@ -62,11 +61,12 @@ class App extends Component{
     // }
 
     render(){
+        console.log('To Do List :', this.state.items);
         return (
             <div className ='container'>
-                <h1 className ='center'>To Do List</h1>
-                <AddItem  add={this.addItem.bind(this)} />
-                <TodoList list={this.state.items} />
+                <Route exact path='/' render={(props)=>{
+                    return <Home add={this.addItem.bind(this)} list={this.state.items} {...props} />
+                }} />
             </div>
         );
 
