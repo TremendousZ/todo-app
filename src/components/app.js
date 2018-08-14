@@ -35,6 +35,18 @@ class App extends Component{
     }
     }
 
+    async toggleItemComplete(id){
+        const { api: {BASE_URL,API_KEY}} = config;
+
+        try{
+            const resp = await axios.put(`${BASE_URL}/todos/${id + API_KEY}`);
+            return resp.data.todo;
+        } catch(err){
+            console.log('Toggle Complete Error:', err.message);
+        }
+
+    }
+
     async deleteItem(id){
         const { api: {BASE_URL,API_KEY}} = config; 
 
@@ -80,7 +92,7 @@ class App extends Component{
                         return <Home add={this.addItem.bind(this)} list={this.state.items} getList={this.getListData.bind(this)} {...props} />
                     }} />
                     <Route path='/item-details/:item_id' render={ routeProps => {
-                        return <ItemDetails delete={this.deleteItem.bind(this)} {...routeProps} />
+                        return <ItemDetails toggleComplete={this.toggleItemComplete.bind(this)} delete={this.deleteItem.bind(this)} {...routeProps} />
                     }} />
                     <Route component={NotFound} />
                 </Switch>

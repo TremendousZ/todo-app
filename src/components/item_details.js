@@ -25,6 +25,13 @@ class ItemDetails extends Component{
 
         this.props.history.push('/');
     }
+    async handleToggleComplete(){
+       const todoItem = await this.props.toggleComplete(this.state.itemDetails._id);
+       console.log('Item Details Toggle Complete Resp:    ', todoItem);
+       this.setState({
+           itemDetails: todoItem
+       })
+    }
 
     render(){
 
@@ -47,10 +54,15 @@ class ItemDetails extends Component{
             
                 <h4><em>Title:</em> {itemDetails.title}</h4>
                 <h4><em>Details:</em> {itemDetails.details}</h4>
+                <h5>
+                    {
+                    itemDetails.complete? 'Item Complete': 'Item is not yet complete'
+                    }
+                </h5>
                 <div>
                     <div className="row">
                         <div className="col s6 center">
-                        <button className="btn blue">Toggle Complete</button>
+                        <button className="btn blue" onClick={this.handleToggleComplete.bind(this)}>Toggle Complete</button>
                         </div>
 
                         <div className="col s6 center">
