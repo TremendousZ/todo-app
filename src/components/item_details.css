@@ -1,0 +1,26 @@
+
+
+.backToList{
+    position: absolute;
+    top:25%;
+    right:10%;
+    z-index:1;
+}
+
+
+.taskButton{
+    position: absolute;
+    top:50%;
+    right:10%;
+}
+
+.deleteButton{
+    position: absolute;
+    top:75%;
+    right:10%;
+}
+
+.contentLabel{
+    position: relative;
+    bottom:5vmin;
+}

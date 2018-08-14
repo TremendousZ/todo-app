@@ -3,11 +3,10 @@ import {Link} from 'react-router-dom';
 
 export default (props)=> {
     console.log('Props:'   ,props);
-    const {complete} = props;
     return (
-        <li className={complete? "green collection-item":"red collection-item"}>
+        <li className={props.complete? "green lighten-2 collection-item black-text":"red lighten-2 collection-item black-text"}>
             <Link to={`/item-details/${props.id}`}>{props.title}</Link>
         </li>
     )
 }
-'collection-item'
+

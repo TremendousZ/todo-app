@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import config from '../config';
 import axios from 'axios';
+import './item_details.css';
 
 
 
@@ -45,31 +46,33 @@ class ItemDetails extends Component{
 
 
         return (
-            <div>
+            <div className = 'card'>
                 <h1 className='center'>Item Details</h1>
                 <div className="row">
                     <div className="col s12 right-align">
-                    <Link to='/' className='btn indigo darken-2'>Back to List</Link>
+                    <Link to='/' className='btn indigo darken-2 backToList'>Back to List</Link>
                     </div>
                 </div>
+                <div className = 'card-content contentLabel'>
                 <h4><em>User Name:</em> {itemDetails.userId}</h4>
                 <h4><em>Title:</em> {itemDetails.title}</h4>
                 <h4><em>Details:</em> {itemDetails.details}</h4>
                 <h4><em>ID:</em> {itemDetails._id}</h4>
                 <h4><em>Created ID:</em> {itemDetails.created}</h4>
-                <h5>
+                <h5 className = {itemDetails.complete? 'green-text': 'red-text'}>
                     {
                     itemDetails.complete? 'Item Complete': 'Item is not yet complete'
                     }
                 </h5>
+                </div>
                 <div>
                     <div className="row">
                         <div className="col s6 center">
-                        <button className= {itemDetails.complete? "red btn":"green btn"} onClick={this.handleToggleComplete.bind(this)}>{itemDetails.complete? "Restore":"Complete Task"}</button>
+                        <button className= {itemDetails.complete? "red btn taskButton":"green btn taskButton"} onClick={this.handleToggleComplete.bind(this)}>{itemDetails.complete? "Restore":"Complete Task"}</button>
                         </div>
 
                         <div className="col s6 center">
-                        <button onClick= {this.handleDelete.bind(this)} className="btn red darken-2">Delete</button>
+                        <button onClick= {this.handleDelete.bind(this)} className="btn red darken-2 deleteButton">Delete</button>
                         </div>
                     </div>
                 </div>
