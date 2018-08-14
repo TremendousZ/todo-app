@@ -4,6 +4,7 @@ import config from '../config';
 import axios from 'axios';
 
 
+
 class ItemDetails extends Component{
     state = {
         itemDetails: null
@@ -51,9 +52,11 @@ class ItemDetails extends Component{
                     <Link to='/' className='btn indigo darken-2'>Back to List</Link>
                     </div>
                 </div>
-            
+                <h4><em>User Name:</em> {itemDetails.userId}</h4>
                 <h4><em>Title:</em> {itemDetails.title}</h4>
                 <h4><em>Details:</em> {itemDetails.details}</h4>
+                <h4><em>ID:</em> {itemDetails._id}</h4>
+                <h4><em>Created ID:</em> {itemDetails.created}</h4>
                 <h5>
                     {
                     itemDetails.complete? 'Item Complete': 'Item is not yet complete'
@@ -62,7 +65,7 @@ class ItemDetails extends Component{
                 <div>
                     <div className="row">
                         <div className="col s6 center">
-                        <button className="btn blue" onClick={this.handleToggleComplete.bind(this)}>Toggle Complete</button>
+                        <button className= {itemDetails.complete? "red btn":"green btn"} onClick={this.handleToggleComplete.bind(this)}>{itemDetails.complete? "Restore":"Complete Task"}</button>
                         </div>
 
                         <div className="col s6 center">
