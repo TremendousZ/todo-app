@@ -54,7 +54,7 @@ class ItemDetails extends Component{
                     </div>
                 </div>
                 <div className = 'card-content contentLabel'>
-                <h4><em>User Name:</em> {itemDetails.userId}</h4>
+                <h4><em>User Name:</em> TremendousZ</h4>
                 <h4><em>Title:</em> {itemDetails.title}</h4>
                 <h4><em>Details:</em> {itemDetails.details}</h4>
                 <h4><em>ID:</em> {itemDetails._id}</h4>

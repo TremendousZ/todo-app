@@ -13,7 +13,7 @@ class Home extends Component {
             <div>
                 <h1 className ='center'>To Do List</h1>
                 <AddItem  add={add} />
-                <TodoList list={list} /> 
+                <TodoList list={list} {...this.props}/> 
             </div>
         )
 
